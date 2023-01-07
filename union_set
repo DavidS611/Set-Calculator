@@ -1,0 +1,16 @@
+union_set
+union_setSETA,SETB,SETC
+union_set SETA,SETB,SETC			,
+				union_set,SETA,SETB,SETC
+sub_set	SETA SETB SETC
+sub_set sETA,SETB,SETC
+Sub_set SETA,SETB,SETC
+intersect_set SETA,
+symdiff_set SETA,SETB,
+read_set SETA,1,2,3,-1
+sub_set SETA,SETB,SETA
+print_set SETA
+intersect_set SETA,SETA,SETA
+union_set SETA,SETA,SETA
+symdiff_set SETA,SETA,SETA
+union_setSETASETASETA
