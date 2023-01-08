@@ -51,10 +51,10 @@ int main(){
 /************************__________COMMAND_LINE__________************************/
 int errorHandling(char commandLine[], char commandName[]){
     int i=0, commaFlag=1, whitespaceFlag=1, numFlag=1;
-    char *substring = commandLine, *num, outOfRange=0;
+    char *substring = commandLine, *num, *endptr;
     /* error check for 'stop' command*/
     if(strcmp(commandName, "stop")==0){
-        /*checks if there is nothing before stop command*/
+        /*checks if there is nothing before the stop command*/
         for(i=0; strncmp(substring+i, "stop", strlen("stop"))!=0; i++){
             if(isspace(substring[i])==0){
                 printf("Unknown chars before command\n");
@@ -62,7 +62,7 @@ int errorHandling(char commandLine[], char commandName[]){
             }
         }
         substring = strstr(commandLine, "stop") + strlen("stop"); /* substring after "stop" letters*/
-        /* checks there is no chars other than whitespaces after stop command*/
+        /* checks for any characters other than whitespaces after the stop command*/
         for(i=0; substring[i] != '\0'; i++){
             if(isspace(substring[i])==0){
                 printf("Extraneous text after end of command\n");
@@ -72,7 +72,7 @@ int errorHandling(char commandLine[], char commandName[]){
     }
     /* error check for 'read_set' command*/
     else if(strcmp(commandName, "read_set")==0){
-        /*checks if there is no chars before command other than whitespaces*/
+        /*checks if there are no characters before the command other than whitespace*/
         for(i=0; strncmp(substring+i, "read_set", strlen("read_set"))!=0; i++){
             if(isspace(substring[i])==0){
                 printf("Unknown chars before command\n");
@@ -112,45 +112,50 @@ int errorHandling(char commandLine[], char commandName[]){
                 return ERROR;
             }
         }
-        /*checks -1 at end and no more chars after it except from whitespaces*/
+        /*checks -1 at the end and no more chars after it except for whitespaces*/
         substring = strstr(commandLine, "-1"); /* substring points to first appearance of "-1"*/
         if(substring==NULL){
             printf("List of set members is not terminated correctly\n");
             return ERROR;
         }
-        num = substring = strstr(commandLine, ","); /* num and substring points to the first comma*/
-        /* checks if there is invalid char inside the numbers, and if there is empty number, and if there is a number that is separate by whitespace*/
-        for(i=0, commaFlag=1; substring[i]!='\0' && strncmp(substring+i, "-1", strlen("-1"))!=0; i++, outOfRange=strtol(num+1, &num, 10)){
-            if(isspace(substring[i]))
-                continue;
-            if(outOfRange<-1 || outOfRange>127){ /* checks if there is a number out of range*/
+        substring = strstr(commandLine, ","); /* substring points to the first comma*/
+        endptr = num = substring + 1; /* num and endptr points after the first comma*/
+        /* checks if there is an invalid char inside the number, and if there is an empty number, and if there is a number that is separated by whitespace*/
+        for(i=0, commaFlag=1, endptr=substring; substring[i]!='\0' && strncmp(substring+i, "-1", strlen("-1"))!=0; i++){
+            /* checks if there is a number out of range*/
+            if(strtol(num+1, &endptr, 10) < -1 || atoi(num)>127){
                 printf("Invalid set member – value out of range\n");
                 return ERROR;
             }
-            if((ispunct(substring[i]) || isalpha(substring[i])) && substring[i]!=','){ /* if char is punctuation or alphabetic except from comma*/
-                printf("Invalid set member – not an integer");
+            /* if char is punctuation or alphabetic except for comma*/
+            if((ispunct(substring[i]) || isalpha(substring[i])) && substring[i]!=','){
+                printf("Invalid set member – not an integer\n");
                 return ERROR;
             }
-            if(commaFlag && substring[i]==','){ /* turn off numFlag turn on comma flag to check if there is commas seperated by whitespaces*/
+            /* turn off numFlag turn on comma flag ,check if there are commas separated by whitespaces*/
+            if(commaFlag && substring[i]==','){
                 numFlag=1;
                 commaFlag = 0;
                 continue;
             }
-            if(numFlag && isdigit(substring[i])){ /* turn off commaFlag turn on numFlag to check if there is numbers that seperated by whitespaces*/
+            /* turn off commaFlag turn on numFlag, check if there are numbers that are separated by whitespaces*/
+            if(numFlag && isdigit(substring[i])){
                 commaFlag=1;
                 numFlag=0;
                 continue;
             }
-            if(commaFlag==0 && substring[i]==','){ /* commas that seperated only by whitespaces*/
+            /* commas that seperated only by whitespaces*/
+            if(commaFlag==0 && substring[i]==','){
                 printf("Missing number\n");
                 return ERROR;
             }
-            if(numFlag==0 && isdigit(substring[i]) && isspace(substring[i-1])){ /* nums that seperated only by whitespaces*/
+            /* numbers separated only by whitespaces*/
+            if(numFlag==0 && isdigit(substring[i]) && isspace(substring[i-1])){
                 printf("Missing comma\n");
                 return ERROR;
             }
         }
-        /*checks if there is no other chars after end of command other than whitespaces*/
+        /* checks if there are no other characters after the end of the command other than whitespaces*/
         substring = strstr(commandLine, "-1") + strlen("-1"); /* substring points after "-1" chars*/
         for(i=0; substring[i]!='\0'; i++){
             if(isspace(substring[i])==0){
@@ -161,7 +166,7 @@ int errorHandling(char commandLine[], char commandName[]){
     }
     /* error check for 'print_set' command*/
     else if(strcmp(commandName, "print_set")==0){
-        /*checks if there is nothing before print_set command other than whitespaces*/
+        /*checks if there is nothing before the print_set command other than whitespaces*/
         for (i = 0; strncmp(substring + i, "print_set", strlen("print_set")) != 0 && substring[i] != '\0'; i++) {
             if (isspace(substring[i]) == 0) {
                 printf("Unknown chars before command name\n");
@@ -204,7 +209,7 @@ int errorHandling(char commandLine[], char commandName[]){
     }
     /* error check for 'union_set'/'sub_set'/'intersect_set'/'symdiff_set' commands*/
     else if(strcmp(commandName, "union_set")==0 || strcmp(commandName, "sub_set")==0 || strcmp(commandName, "intersect_set")==0 || strcmp(commandName, "symdiff_set")==0){
-        /*checks if there is no other chars before command name except whitespaces*/
+        /*checks if there are no other characters before the command name except whitespaces*/
         for(i=0; COMMAND_MACRO(substring+i) && substring[i]!='\0'; i++){
             if (isspace(substring[i]) == 0) {
                 printf("Unknown chars before command name\n");
@@ -222,7 +227,7 @@ int errorHandling(char commandLine[], char commandName[]){
         else
             substring = strstr(commandLine, "symdiff_set") + strlen("symdiff_set");
 
-        /* checks if there is no other chars between command name and first set name other than whitespaces*/
+        /* checks if there are no other characters between command name and first set name other than whitespaces*/
         for(i=0; SET_MACRO(substring+i) && substring[i]!='\0'; i++){
             /* checks if there is at least one whitespace after command name and before set1 name*/
             if(whitespaceFlag && isspace(substring[i])!=0){
