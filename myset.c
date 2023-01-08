@@ -25,6 +25,7 @@ enum error{ERROR = -1, NO_ERROR};
 SET *setIdentifier(char *setString);
 void commandLine(SET *set1, SET *set2, SET *set3);
 int errorHandling(char commandLine[], char commandName[]);
+int validNumber(char *pointerNumbers);
 
 /**************************__________MAIN__________**************************/
 int main(){
@@ -51,7 +52,7 @@ int main(){
 /************************__________COMMAND_LINE__________************************/
 int errorHandling(char commandLine[], char commandName[]){
     int i=0, commaFlag=1, whitespaceFlag=1, numFlag=1;
-    char *substring = commandLine, *num, *endptr;
+    char *substring = commandLine;
     /* error check for 'stop' command*/
     if(strcmp(commandName, "stop")==0){
         /*checks if there is nothing before the stop command*/
@@ -119,14 +120,15 @@ int errorHandling(char commandLine[], char commandName[]){
             return ERROR;
         }
         substring = strstr(commandLine, ","); /* substring points to the first comma*/
-        endptr = num = substring + 1; /* num and endptr points after the first comma*/
+
+        /* checks if there is a number out of range*/
+        if(validNumber(substring+1)==ERROR) { /* substring+1 points after the first comma*/
+            printf("Invalid set member – value out of range\n");
+            return ERROR;
+        }
+
         /* checks if there is an invalid char inside the number, and if there is an empty number, and if there is a number that is separated by whitespace*/
-        for(i=0, commaFlag=1, endptr=substring; substring[i]!='\0' && strncmp(substring+i, "-1", strlen("-1"))!=0; i++){
-            /* checks if there is a number out of range*/
-            if(strtol(num+1, &endptr, 10) < -1 || atoi(num)>127){
-                printf("Invalid set member – value out of range\n");
-                return ERROR;
-            }
+        for(i=0, commaFlag=1; substring[i]!='\0' && strncmp(substring+i, "-1", strlen("-1"))!=0; i++){
             /* if char is punctuation or alphabetic except for comma*/
             if((ispunct(substring[i]) || isalpha(substring[i])) && substring[i]!=','){
                 printf("Invalid set member – not an integer\n");
@@ -494,3 +496,24 @@ SET *setIdentifier(char *setName){
         return NULL;
 }
 /*_____________________________________________________________________________*/
+
+/* checking if there is a number out of range*/
+int validNumber(char *pointerNumbers){ /* pointerNumbers point after the first comma in read_set command*/
+    long int num, len = strlen(pointerNumbers);
+    char *copyPointerNumbers = malloc(sizeof(char)*len);
+    char *crusor;
+    strcpy(copyPointerNumbers, pointerNumbers); /* creating a copy of the string numbers*/
+    crusor = strtok(copyPointerNumbers, ","); /* first number inside crusor*/
+    num = strtol(crusor, NULL, 10); /* first number inside num as a long int*/
+    while (crusor!=NULL) {
+        num = strtol(crusor, NULL, 10);
+        /* if the number inside the string is negative or greater than 127 return and error*/
+        if(num<-1 || num>127) {
+            free(copyPointerNumbers); /* freeing the memory if there is an invalid number*/
+            return ERROR;
+        }
+        crusor = strtok(NULL, ","); /* next number inside crusor*/
+    }
+    free(copyPointerNumbers); /* freeing the memory if the numbers are valid*/
+    return NO_ERROR;
+}
