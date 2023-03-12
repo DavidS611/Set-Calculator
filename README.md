@@ -1,10 +1,12 @@
 # Set Calculator
-Welcome to the Set Calculator! This calculator allows you to manipulate up to seven different sets, 
+Welcome to the Set Calculator! 
+
+This calculator allows you to manipulate up to seven different sets, 
 from 'SETA' to 'SETF', by filling them with numbers between 0 and 127. 
 
-Here's what you need to know to use the Set Calculator:
+## Here's what you need to know to use the Set Calculator:
 
-## Usage
+### Usage
 
 - The calculator can be stopped immediately by using the stop action or by pressing the EOF key combination.
 - You can use the read_set action to read numbers into a particular set group. Numbers must be positive and at the end of the read action, you should include the number -1. Each number should be separated by a comma. For example, read_set SETA, 3, 1, 22, -1.
@@ -20,5 +22,5 @@ Here's what you need to know to use the Set Calculator:
 - By pressing the enter key, you can enter orders one after another in the calculator.
 - You can use whitespace as you wish. However, additional text or commas are not allowed.
 
-### Have fun and good luck!
+#### Have fun and good luck!
 
