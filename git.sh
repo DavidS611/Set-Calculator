@@ -13,5 +13,4 @@ if [[ -n "$3" ]]; then
 else
     git commit -m "$2"
 fi
-git push 
-
+git push -u origin main
