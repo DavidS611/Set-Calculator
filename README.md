@@ -20,5 +20,5 @@ Here's what you need to know to use the Set Calculator:
 - By pressing the enter key, you can enter orders one after another in the calculator.
 - You can use whitespace as you wish. However, additional text or commas are not allowed.
 
-## Have fun and good luck!
+### Have fun and good luck!
 
