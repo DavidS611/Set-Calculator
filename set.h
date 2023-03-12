@@ -54,5 +54,4 @@ void symdiff_set(SET SET1, SET SET2, SET result_set);
 /* Function that stops the calculator*/
 void stop();
 
-
 #endif

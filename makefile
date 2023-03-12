@@ -10,10 +10,5 @@ a.out: myset.o
 myset.o: myset.c set.c
 	$(CC) $(CFLAGS) -c myset.c set.c
 
-output:
-	./a.out < mamanTest > mamanOutput
-	./a.out < readTest > readOutput
-	./a.out < printTest > printOutput
-	./a.out < groupFunctionsTest > groupFunctionsOutput
 clean:
 	rm  a.out -f *Output -f *.o
