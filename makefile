@@ -11,9 +11,9 @@ myset.o: myset.c set.c
 	$(CC) $(CFLAGS) -c myset.c set.c
 
 output:
-	./a.out < test > output
+	./a.out < mamanTest > mamanOutput
 	./a.out < readTest > readOutput
 	./a.out < printTest > printOutput
-	./a.out < groupTest > groupOutput
+	./a.out < groupFunctionsTest > groupFunctionsOutput
 clean:
-	rm readOutput a.out -f *.o
+	rm  a.out -f *Output -f *.o

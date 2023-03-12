@@ -19,32 +19,37 @@
             strncmp(substring, "sub_set", strlen("sub_set"))!=0 &&     \
             strncmp(substring, "symdiff_set", strlen("symdiff_set"))!=0 && \
             strncmp(substring, "intersect_set", strlen("intersect_set"))!=0
+
+#define WELCOME_MESSAGE \
+    printf("\t\t---------------------------------------------------\n"); \
+    printf("\t\t\tWelcome to the SET CALCULATOR:\n"); \
+    printf("\t\t---------------------------------------------------\n"); \
+    printf("There are seven possible groups from 'SETA' to 'SETF' that can be filled with numbers between zero and 127.\n"); \
+    printf("\t1. The calculator can be stopped immediately by using the 'stop' action or EOF.\n"); \
+    printf("\t2. There is a 'read_set' action to read numbers into a particular set group.\n"); \
+    printf("\t   Numbers must be positive and at the end of the read action should be the number -1,\n"); \
+    printf("\t   and each number should be separated by a comma. (e.g. \"read_set SETA, 3, 1, 22, -1\").\n"); \
+    printf("\t3. A print action is provided, 'print_set' followed by the set name.\n"); \
+    printf("\t   This prints all numbers inserted into the group, up to sixteen numbers per line.\n"); \
+    printf("\t4. You can also perform group manipulation using union with 'union_set', subtraction with 'sub_set',\n"); \
+    printf("\t   intersection with 'intersect_set', and symmetrical difference with 'symdiff_set'.\n"); \
+    printf("\t   Each must be followed by three set-groups, separated by a comma.\n"); \
+    printf("\nBy pressing the enter key, you can enter orders one after another in the calculator.\n"); \
+    printf("You can use whitespace as you wish. However, additional text or commas are not allowed.\n"); \
+    printf("GOOD LUCK & HAVE FUN.\n\n")
+
 enum error{ERROR = -1, NO_ERROR};
 
 /* Prototype declarations*/
 SET *setIdentifier(char *setString);
-void commandLine(SET *set1, SET *set2, SET *set3);
+void commandLine();
 int errorHandling(char commandLine[], char commandName[]);
 int validNumber(char *pointerNumbers);
 
 /**************************__________MAIN__________**************************/
 int main(){
-    SET *set1=NULL, *set2=NULL, *set3=NULL;
-    printf("Welcome to the SET CALCULATOR:"
-           "\nThere are seven possible groups from 'SETA' to 'SETF' that can be filled with numbers between zero and 127. "
-           "\n\t1. The calculator can be stopped immediately by using the 'stop' action or EOF."
-           "\n\t2. There is a 'read_set' action to read numbers into a particular set group. "
-           "\n\t   Numbers must be positive and at the end of the read action should be the number -1, "
-           "\n\t   and each number should be separated by a comma. (e.g. \"read_set SETA, 3, 1, 22, -1\").");
-    printf("\n\t3. A print action is provided, 'print_set' followed by the set name. "
-           "\n\t   This prints all numbers inserted into the group, up to sixteen numbers per line. "
-           "\n\t4. You can also perform group manipulation using union with 'union_set', subtraction with 'sub_set', "
-           "\n\t   intersection with 'intersect_set', and symmetrical difference with 'symdiff_set'."
-           "\n\t   Each must be followed by three set-groups, separated by a comma.");
-    printf("\n\tBy pressing the enter key, you can enter orders one after another in the calculator."
-           "\n\tYou can use whitespace as you wish. However, additional text or commas are not allowed."
-           "\n\tGOOD LUCK & HAVE FUN.\n\n");
-    commandLine(set1, set2, set3);
+    WELCOME_MESSAGE;
+    commandLine();
     return 0;
 }
 /*_____________________________________________________________________________*/
@@ -321,9 +326,11 @@ int errorHandling(char commandLine[], char commandName[]){
 /*_____________________________________________________________________________*/
 
 /************************__________COMMAND_LINE__________************************/
-void commandLine(SET *set1, SET *set2, SET *set3) {
+void commandLine() {
     int i , commandLineSize=1;
     char c, *substring, s1, s2, *commandLine, *num;
+    SET *set1=NULL, *set2=NULL, *set3=NULL;
+
     printf("prompt~ ");
     FOREVER {
         /* allocating memory for command line*/
