@@ -24,7 +24,7 @@
     printf("\t\t---------------------------------------------------\n"); \
     printf("\t\t\tWelcome to the SET CALCULATOR:\n"); \
     printf("\t\t---------------------------------------------------\n"); \
-    printf("There are seven possible groups from 'SETA' to 'SETF' that can be filled with numbers between zero and 127.\n"); \
+    printf("\tThere are seven possible groups from 'SETA' to 'SETF' that can be filled with numbers between zero and 127.\n"); \
     printf("\t1. The calculator can be stopped immediately by using the 'stop' action or EOF.\n"); \
     printf("\t2. There is a 'read_set' action to read numbers into a particular set group.\n"); \
     printf("\t   Numbers must be positive and at the end of the read action should be the number -1,\n"); \

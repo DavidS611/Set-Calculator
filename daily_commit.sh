@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git add daily_commit.sh
+git add .
 git commit -m "Daily commit"
 git push 
 
