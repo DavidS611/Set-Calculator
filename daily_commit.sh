@@ -11,5 +11,5 @@ git add .
 git commit -m "Daily commit"
 
 # Push changes with authentication using the access token
-git push https://$GITHUB_TOKEN@github.com/<DavidS611/Set-Calculator.git
+git push https://$GITHUB_TOKEN@github.com/DavidS611/Set-Calculator.git
 
