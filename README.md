@@ -17,13 +17,20 @@ This program is a SET calculator designed to perform various operations on sets.
     This will start the SET calculator.
 
 3. **Commands**:
-    - **read_set**: Read numbers into a particular set. Numbers must be positive integers, separated by commas, and terminated with -1. Example: `read_set SETA, 3, 1, 22, -1`.
-    - **print_set**: Print all numbers inserted into a specified set. Example: `print_set SETB`.
-    - **union_set**: Perform the union operation between three sets. Example: `union_set SETA, SETB, SETC`.
-    - **sub_set**: Perform the subtraction operation between three sets. Example: `sub_set SETA, SETB, SETC`.
-    - **intersect_set**: Perform the intersection operation between three sets. Example: `intersect_set SETA, SETB, SETC`.
-    - **symdiff_set**: Perform the symmetric difference operation between three sets. Example: `symdiff_set SETA, SETB, SETC`.
-    - **stop**: Terminate the calculator.
+    - **read_set**: 
+    - Read numbers into a particular set. Numbers must be positive integers, separated by commas, and terminated with -1. Example: `read_set SETA, 3, 1, 22, -1`.
+    - **print_set**: 
+    - Print all numbers inserted into a specified set. Example: `print_set SETB`.
+    - **union_set**: 
+    - Perform the union operation between three sets. Example: `union_set SETA, SETB, SETC`.
+    - **sub_set**: 
+    - Perform the subtraction operation between three sets. Example: `sub_set SETA, SETB, SETC`.
+    - **intersect_set**: 
+    - Perform the intersection operation between three sets. Example: `intersect_set SETA, SETB, SETC`.
+    - **symdiff_set**: 
+    - Perform the symmetric difference operation between three sets. Example: `symdiff_set SETA, SETB, SETC`.
+    - **stop**: 
+    - Terminate the calculator.
 
 4. **Notes**:
     - The calculator allows whitespace between commands and parameters but does not allow additional text or commas.
@@ -34,9 +41,8 @@ This program is a SET calculator designed to perform various operations on sets.
     ```bash
     make clean
     ```
+    
+![Local Image](/tests/example_1.png)
 
-### Additional Information
-- **Author**: [Your Name]
-- **Version**: 1.0
 - **License**: MIT License
 
