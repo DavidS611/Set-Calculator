@@ -18,19 +18,19 @@ This program is a SET calculator designed to perform various operations on sets.
 
 3. **Commands**:
     - **read_set**: <br>
-    Read numbers into a particular set. Numbers must be positive integers, separated by commas, and terminated with -1. Example: `read_set SETA, 3, 1, 22, -1`.
+    	Read numbers into a particular set. Numbers must be positive integers, separated by commas, and terminated with -1. Example: `read_set SETA, 3, 1, 22, -1`.
     - **print_set**: <br>
-    Print all numbers inserted into a specified set. Example: `print_set SETB`.
+    	Print all numbers inserted into a specified set. Example: `print_set SETB`.
     - **union_set**: <br>
-    Perform the union operation between three sets. Example: `union_set SETA, SETB, SETC`.
+    	Perform the union operation between three sets. Example: `union_set SETA, SETB, SETC`.
     - **sub_set**: <br>
-    Perform the subtraction operation between three sets. Example: `sub_set SETA, SETB, SETC`.
+    	Perform the subtraction operation between three sets. Example: `sub_set SETA, SETB, SETC`.
     - **intersect_set**: <br>
-    Perform the intersection operation between three sets. Example: `intersect_set SETA, SETB, SETC`.
+    	Perform the intersection operation between three sets. Example: `intersect_set SETA, SETB, SETC`.
     - **symdiff_set**: <br>
-    Perform the symmetric difference operation between three sets. Example: `symdiff_set SETA, SETB, SETC`.
+    	Perform the symmetric difference operation between three sets. Example: `symdiff_set SETA, SETB, SETC`.
     - **stop**: <br>
-    Terminate the calculator.
+    	Terminate the calculator.
 
 4. **Notes**: <br>
     - The calculator allows whitespace between commands and parameters but does not allow additional text or commas.
