@@ -29,7 +29,7 @@ This program is a SET calculator designed to perform various operations on sets.
     Perform the intersection operation between three sets. Example: `intersect_set SETA, SETB, SETC`.
     - **symdiff_set**: <br>
     Perform the symmetric difference operation between three sets. Example: `symdiff_set SETA, SETB, SETC`.
-    - <u>**stop**<u>: <br>
+    - **stop**: <br>
     Terminate the calculator.
 
 4. **Notes**: <br>
